@@ -23,6 +23,14 @@
       }
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*": "prettier --write"
+  },
   "dependencies": {
     "husky": "^9.0.11",
     "next": "14.1.3",
