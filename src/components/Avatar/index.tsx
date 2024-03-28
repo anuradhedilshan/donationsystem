@@ -1,5 +1,3 @@
-
-
 type Props = {
   alt: string;
   imgSrc: string;
