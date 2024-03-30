@@ -1,12 +1,12 @@
 import SelectGroupOne from '@/components/SelectGroup/SelectGroupOne';
 import SelectPlain from '@/components/SelectGroup/SelectPlain';
+import Chip from '@/components/chip';
 export default function TopBar() {
   return (
-    <div className="p-2  flex justify-around">
-      <SelectPlain label="Student Type" />
-      <SelectPlain />
-      <SelectPlain />
-      <SelectPlain />
+    <div className="p-2  flex justify-start space-x-1">
+      <Chip label="male"/>
+      <Chip label="female" />
+      <Chip label='Mahiyanganaya'/>
     </div>
   );
 }

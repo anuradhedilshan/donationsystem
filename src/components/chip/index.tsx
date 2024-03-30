@@ -8,7 +8,7 @@ interface ChipProps {
 
 const Chip: React.FC<ChipProps> = ({
   label,
-  type = 'filled',
+  type = 'fillesd',
   size = 'medium',
 }) => {
   const getTypeClass = () => {
@@ -21,7 +21,7 @@ const Chip: React.FC<ChipProps> = ({
         return 'bg-gray-900/10 text-gray-900';
       case 'filled':
       default:
-        return 'bg-gray-900';
+        return 'bg-graydark';
     }
   };
 

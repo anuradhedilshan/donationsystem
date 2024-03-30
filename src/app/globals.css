@@ -2,3 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+.range-slider {
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: theme('colors.primary-dark'); /* Grey background */
+  outline: none; /* Remove outline */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
+  border-radius: 30px;
+}
+
+.range-slider::-webkit-slider-thumb{
+  -webkit-appearance: none;
+  width: 51px;
+  height: 51px;
+  border-radius: 60px;
+  background-color: theme('colors.primary-light');
+}
