@@ -16,7 +16,6 @@ export default function MobileInput() {
           <rect width="19.6" height="14" y=".5" fill="#fff" rx="2" />
           <mask
             id="a"
-            style="mask-type:luminance"
             width="20"
             height="15"
             x="0"
@@ -124,7 +123,6 @@ export default function MobileInput() {
                   <rect width="19.6" height="14" y=".5" fill="#fff" rx="2" />
                   <mask
                     id="a"
-                    style="mask-type:luminance"
                     width="20"
                     height="15"
                     x="0"
@@ -206,7 +204,6 @@ export default function MobileInput() {
                   <rect width="19.6" height="14" y=".5" fill="#fff" rx="2" />
                   <mask
                     id="a"
-                    style="mask-type:luminance"
                     width="20"
                     height="15"
                     x="0"
@@ -257,7 +254,6 @@ export default function MobileInput() {
                   <rect width="19.6" height="14" y=".5" fill="#fff" rx="2" />
                   <mask
                     id="a"
-                    style="mask-type:luminance"
                     width="20"
                     height="15"
                     x="0"
@@ -333,7 +329,6 @@ export default function MobileInput() {
                   <rect width="19.6" height="14" y=".5" fill="#fff" rx="2" />
                   <mask
                     id="a"
-                    style="mask-type:luminance"
                     width="20"
                     height="15"
                     x="0"
@@ -447,7 +442,6 @@ export default function MobileInput() {
                   />
                   <mask
                     id="a"
-                    style="mask-type:luminance"
                     width="20"
                     height="15"
                     x="0"
@@ -490,7 +484,6 @@ export default function MobileInput() {
                   <rect width="19.6" height="14" y=".5" fill="#fff" rx="2" />
                   <mask
                     id="a"
-                    style="mask-type:luminance"
                     width="20"
                     height="15"
                     x="0"

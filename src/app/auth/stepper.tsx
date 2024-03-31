@@ -94,7 +94,6 @@ function CheckIcon() {
       viewBox="0 96 960 960"
       stroke="currentColor"
       strokeWidth={80}
-      strokeHeight={80}
     >
       <motion.path
         initial={{ pathLength: 0 }}
@@ -108,7 +107,6 @@ function CheckIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"
-        d="M382 816 154 588l57-57 171 171 367-367 57 57-424 424Z"
       />
     </svg>
   );
