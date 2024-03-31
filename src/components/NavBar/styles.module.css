@@ -1,10 +1,9 @@
 .nav {
-    height: 40px;
-    font-size: 1.5rem;
-    border-bottom: 2px solid ;
-    & a {
-        margin: 10px;
-        
-    }
+  height: 40px;
+  font-size: 1.5rem;
+  border-bottom: 2px solid;
 }
- 
+
+.nav a {
+  margin: 10px;
+}

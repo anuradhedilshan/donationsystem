@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import React, { useState } from 'react';
 
 export default function DonateSlider() {
@@ -37,7 +39,7 @@ export default function DonateSlider() {
         onMouseUp={handleChange}
       />
       <button className="bg-secondary mt-7 block w-fit px-24 py-1 rounded-xl font-anton text-4xl">
-        Donate
+        <Link href={'/auth'}>Donate</Link>
       </button>
     </div>
   );

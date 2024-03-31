@@ -1,3 +1,3 @@
-export default DonorPage(){
-  return <h1>Donor PAge</h1>
+export default function DonorPage() {
+  return <h1>Donor PAge</h1>;
 }
