@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Signupform from './signup/forms/singup';
 import Signupform1 from './signup/forms/signup1';
+import Signupform2 from './signup/forms/singup2';
 
 export default function Stepper() {
   const [step, setStep] = useState(1);
@@ -22,6 +23,7 @@ export default function Stepper() {
       <div className="flex gap-8 w-full justify-center">
         <Step step={step} stepOrder={1} setStep={setStep} />
         <Step step={step} stepOrder={2} setStep={setStep} />
+        <Step step={step} stepOrder={3} setStep={setStep} />
       </div>
 
       {step == 1 ? (
@@ -29,7 +31,7 @@ export default function Stepper() {
       ) : step == 2 ? (
         <Signupform1 />
       ) : (
-        <Signupform />
+        <Signupform2 />
       )}
 
       <div className="flex justify-between mt-8">
