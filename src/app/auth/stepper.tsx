@@ -86,7 +86,6 @@ function CheckIcon() {
       viewBox="0 96 960 960"
       stroke="currentColor"
       strokeWidth={80}
-      strokeHeight={80}
     >
       <motion.path
         initial={{ pathLength: 0 }}

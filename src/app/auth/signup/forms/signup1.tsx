@@ -1,6 +1,12 @@
 import SelectGroupOne from '@/components/SelectGroup/SelectGroupOne';
 import Link from 'next/link';
-import { FaEnvelope, FaLocationArrow, FaLocationDot, FaMobile } from 'react-icons/fa6';
+import {
+  FaEnvelope,
+  FaLocationArrow,
+  FaLocationDot,
+  FaMobile,
+} from 'react-icons/fa6';
+import { countriesDonationList } from './formValues';
 
 export default function Signupform1() {
   return (
@@ -11,7 +17,7 @@ export default function Signupform1() {
       {/* <DonateSlider /> */}
       <form>
         <div className="mb-4">
-          <SelectGroupOne label="Country" />
+          <SelectGroupOne values={countriesDonationList} label="Country" />
         </div>
 
         <div className="mb-4">
@@ -50,18 +56,14 @@ export default function Signupform1() {
 
         <div className="mb-6">
           <label className="mb-2.5 block font-medium text-black dark:text-white">
-            Mobile Number
+            BirthDay
           </label>
           <div className="relative">
             <input
-              type="password"
-              placeholder="Re-enter your password"
+              type="date"
+              placeholder="enter your BirthDay"
               className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 text-black outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:text-white dark:focus:border-primary"
             />
-
-            <span className="absolute right-4 top-4">
-              <FaMobile />
-            </span>
           </div>
         </div>
 

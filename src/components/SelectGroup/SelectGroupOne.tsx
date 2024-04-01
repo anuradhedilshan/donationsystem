@@ -3,9 +3,14 @@ import React, { useState } from 'react';
 
 type Props = {
   label: string;
+  values: {
+    name: string;
+    value: string | number;
+  }[];
+  value?: string | number | object;
 };
 
-const SelectGroupOne = ({ label }: Props) => {
+const SelectGroupOne = ({ label, values }: Props) => {
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
 
@@ -31,17 +36,18 @@ const SelectGroupOne = ({ label }: Props) => {
           }`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">
-            Select your subject
+            Select your {label}
           </option>
-          <option value="USA" className="text-body dark:text-bodydark">
-            USA
-          </option>
-          <option value="UK" className="text-body dark:text-bodydark">
-            UK
-          </option>
-          <option value="Canada" className="text-body dark:text-bodydark">
-            Canada
-          </option>
+
+          {values.map((e) => (
+            <option
+              key={e.name}
+              value={e.value}
+              className="text-body dark:text-bodydark"
+            >
+              {e.name}
+            </option>
+          ))}
         </select>
 
         <span className="absolute right-4 top-1/2 z-30 -translate-y-1/2">
