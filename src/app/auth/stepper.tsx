@@ -2,7 +2,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Signupform from './signup/forms/singup';
 import Signupform1 from './signup/forms/signup1';
 
@@ -47,7 +47,15 @@ export default function Stepper() {
   );
 }
 
-function Step({ step, stepOrder, setStep }) {
+function Step({
+  step,
+  stepOrder,
+  setStep,
+}: {
+  step: number;
+  stepOrder: number;
+  setStep: Dispatch<SetStateAction<number>>;
+}) {
   const status =
     step === stepOrder ? 'active' : step > stepOrder ? 'complete' : 'inactive';
 
@@ -99,7 +107,6 @@ function CheckIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
         d="M378 810 154 586l43-43 181 181 384-384 43 43-427 427Z"
-        d="M382 816 154 588l57-57 171 171 367-367 57 57-424 424Z"
       />
     </svg>
   );

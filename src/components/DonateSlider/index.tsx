@@ -2,17 +2,17 @@
 
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useState } from 'react';
 
 export default function DonateSlider() {
   const [amount, setAmount] = useState(10);
 
-  const handleChange = (event) => {
-    const newValue = parseInt(event.target.value);
+  const handleChange = (event: MouseEvent<HTMLInputElement>) => {
+    const newValue = parseInt(event.currentTarget.value);
     setAmount(newValue);
   };
 
-  const handleSliderChange = (event) => {
+  const handleSliderChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(event.target.value);
     // Adjusting the slider to change the amount by 5 at the end
     if (newValue > 100) {

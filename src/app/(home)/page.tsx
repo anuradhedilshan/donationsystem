@@ -28,7 +28,7 @@ export default function home() {
           <StatusBox
             title={'Total'}
             value={'3892$+'}
-            varient={{ mode: 'light' }}
+            // varient={{ mode: 'light' }}
           />
         </div>
       </section>

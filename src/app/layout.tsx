@@ -10,6 +10,7 @@ const anton = Anton({
 });
 
 const popin = Poppins({
+  subsets: ['latin'],
   variable: '--font-poppins',
   weight: '400',
 });
