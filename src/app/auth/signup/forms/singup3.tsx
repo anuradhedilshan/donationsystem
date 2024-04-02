@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-const EmailVerificationTemplate = () => {
+const Signupform3 = () => {
   return (
     <div className="flex items-center justify-center flex-col mt-2">
       <section className="max-w-2xl mx-auto bg-white">
@@ -71,7 +71,7 @@ const EmailVerificationTemplate = () => {
     </div>
   );
 };
-export default EmailVerificationTemplate;
+export default Signupform3;
 const EmailIcon = () => {
   return (
     <svg

@@ -5,13 +5,20 @@ import { motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Signupform from './signup/forms/singup';
 import Signupform1 from './signup/forms/signup1';
-import Signupform2 from './signup/forms/singup2';
+import { useRouter } from 'next/navigation';
+import Signupform3 from './signup/forms/singup3';
+import Signupform2 from './signup/forms/signup2';
 
 export default function Stepper() {
   const [step, setStep] = useState(1);
+  const router = useRouter();
 
   function nextStep() {
-    if (step < 5) setStep((lastStep) => lastStep + 1);
+    if (step < 3) {
+      setStep((lastStep) => lastStep + 1);
+    } else {
+      router.push('/dashboard');
+    }
   }
 
   function back() {
@@ -19,19 +26,22 @@ export default function Stepper() {
   }
 
   return (
-    <div className="bg-white p-6 rounded-2xl w-full">
-      <div className="flex gap-8 w-full justify-center">
+    <div className="bg-white p-6 rounded-2xl w-full min-h-[800px] ">
+      <div className="flex gap-8 w-full justify-center ">
         <Step step={step} stepOrder={1} setStep={setStep} />
         <Step step={step} stepOrder={2} setStep={setStep} />
         <Step step={step} stepOrder={3} setStep={setStep} />
+        <Step step={step} stepOrder={4} setStep={setStep} />
       </div>
 
       {step == 1 ? (
         <Signupform />
       ) : step == 2 ? (
         <Signupform1 />
-      ) : (
+      ) : step == 3 ? (
         <Signupform2 />
+      ) : (
+        <Signupform3 />
       )}
 
       <div className="flex justify-between mt-8">
@@ -42,7 +52,7 @@ export default function Stepper() {
           onClick={nextStep}
           className="bg-primary-light text-white py-2 px-8 rounded-full"
         >
-          {step === 5 ? 'Complete' : 'Next'}
+          {step === 3 ? 'Complete' : 'Next'}
         </button>
       </div>
     </div>
