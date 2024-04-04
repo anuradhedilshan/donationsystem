@@ -1,6 +1,10 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 'use client';
 
+type Props = {
+  forms: React.ReactElement[];
+};
+
 import { motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useState } from 'react';
 import Signupform from './signup/forms/singup';
@@ -9,12 +13,15 @@ import { useRouter } from 'next/navigation';
 import Signupform3 from './signup/forms/singup3';
 import Signupform2 from './signup/forms/signup2';
 
-export default function Stepper() {
+export default function Stepper({ forms }: Props) {
   const [step, setStep] = useState(1);
   const router = useRouter();
-
+  const steps = [];
+  for (let i = 0; i < forms.length; i++) {
+    steps.push(<Step step={step} stepOrder={i + 1} setStep={setStep} />);
+  }
   function nextStep() {
-    if (step < 3) {
+    if (step < forms.length) {
       setStep((lastStep) => lastStep + 1);
     } else {
       router.push('/dashboard');
@@ -26,23 +33,10 @@ export default function Stepper() {
   }
 
   return (
-    <div className="bg-white p-6 rounded-2xl w-full min-h-[800px] ">
-      <div className="flex gap-8 w-full justify-center ">
-        <Step step={step} stepOrder={1} setStep={setStep} />
-        <Step step={step} stepOrder={2} setStep={setStep} />
-        <Step step={step} stepOrder={3} setStep={setStep} />
-        <Step step={step} stepOrder={4} setStep={setStep} />
-      </div>
+    <div className="bg-white p-6 rounded-2xl w-full">
+      <div className="flex gap-8 w-full justify-center ">{steps}</div>
 
-      {step == 1 ? (
-        <Signupform />
-      ) : step == 2 ? (
-        <Signupform1 />
-      ) : step == 3 ? (
-        <Signupform2 />
-      ) : (
-        <Signupform3 />
-      )}
+      {step >= 1 && step <= forms.length ? forms[step - 1] : null}
 
       <div className="flex justify-between mt-8">
         <button className="text-gray-700" onClick={back}>
