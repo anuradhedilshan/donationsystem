@@ -1,8 +1,16 @@
-'use client';
+import { PlanDonorSchemaType } from '@/app/auth/signup/forms/donor/schema';
+import {
+  PlanStudentSchemaType,
+  StudentFieldName,
+} from '@/app/auth/signup/forms/student/schema';
+import { error } from 'console';
 import React, { useState } from 'react';
+import { FieldError, useFormContext } from 'react-hook-form';
 
 type Props = {
+  name: string;
   label: string;
+  error?: FieldError;
   values: {
     name: string;
     value: string | number;
@@ -10,14 +18,10 @@ type Props = {
   value?: string | number | object;
 };
 
-const SelectGroupOne = ({ label, values }: Props) => {
-  const [selectedOption, setSelectedOption] = useState<string>('');
-  const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
-
-  const changeTextColor = () => {
-    setIsOptionSelected(true);
-  };
-
+const SelectGroupOne = ({ error, name, label, values }: Props) => {
+  const { register } = useFormContext<
+    PlanStudentSchemaType | PlanDonorSchemaType
+  >();
   return (
     <div className="mb-4.5">
       <label className="mb-2.5 block font-medium text-black dark:text-white">
@@ -26,14 +30,8 @@ const SelectGroupOne = ({ label, values }: Props) => {
 
       <div className="relative z-20 bg-transparent dark:bg-form-input">
         <select
-          value={selectedOption}
-          onChange={(e) => {
-            setSelectedOption(e.target.value);
-            changeTextColor();
-          }}
-          className={`relative z-20 w-full appearance-none rounded border border-stroke bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary ${
-            isOptionSelected ? 'text-black dark:text-white' : ''
-          }`}
+          {...register(name as StudentFieldName)}
+          className={`relative z-20 w-full appearance-none rounded border bg-transparent px-5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary ${error ? 'border-red' : 'border-stroke '}`}
         >
           <option value="" disabled className="text-body dark:text-bodydark">
             Select your {label}

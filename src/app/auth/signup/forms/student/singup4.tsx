@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-const Signupform3 = () => {
+const Signupform4 = () => {
   return (
     <div className="flex items-center justify-center flex-col mt-2">
       <section className="max-w-2xl mx-auto bg-white">
@@ -32,7 +32,7 @@ const Signupform3 = () => {
               7
             </p>
             <p className="flex items-center justify-center w-10 h-10 text-2xl font-medium text-[#365CCE] border border-[#365CCE] rounded-md">
-              8
+              8src/app/auth/signup/forms/donor/signup2.tsx
             </p>
           </div>
           <p className="mt-4 leading-loose text-gray-600">
@@ -71,7 +71,7 @@ const Signupform3 = () => {
     </div>
   );
 };
-export default Signupform3;
+export default Signupform4;
 const EmailIcon = () => {
   return (
     <svg

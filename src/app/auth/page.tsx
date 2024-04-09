@@ -1,50 +1,81 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable @next/next/no-img-element */
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
+'use client';
+import React, { useState } from 'react';
 import Breadcrumb from '@/components/Breadcrumbs/Breadcrumb';
-import { FaEnvelope, FaLocationDot, FaMobile } from 'react-icons/fa6';
-
-import { Metadata } from 'next';
 import DefaultLayout from '@/components/Layouts/DefaultLayout';
-import DonateSlider from '@/components/DonateSlider';
 import Stepper from './stepper';
-
-export const metadata: Metadata = {
-  title: 'Next.js SignUp Page | TailAdmin - Next.js Dashboard Template',
-  description: 'This is Next.js SignUp Page TailAdmin Dashboard Template',
-  // other metadata
-};
+import { useSearchParams } from 'next/navigation';
+import { FormProvider, useForm } from 'react-hook-form';
+import dynamic from 'next/dynamic';
 
 const SignUp: React.FC = () => {
-  return (
-    <DefaultLayout>
-      <Breadcrumb pageName="Sign Up" />
+  console.log('page render');
 
-      <div className="rounded-lg border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
-        <div className="flex flex-wrap items-stretch justify-center">
+  const searchParams = useSearchParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const search = searchParams.get('type');
+  const IStudent =
+    search == 'student' ? true : search == 'donor' ? false : 'true';
+
+  let forms: React.JSX.Element[] = [];
+  if (IStudent) {
+    const Signup1 = dynamic(() =>
+      import('./signup/forms/student').then((e) => e.Signupform),
+    );
+    const Signup2 = dynamic(() =>
+      import('./signup/forms/student').then((e) => e.Signupform1),
+    );
+    const Signup3 = dynamic(() =>
+      import('./signup/forms/student').then((e) => e.Signupform2),
+    );
+    const Signup4 = dynamic(() =>
+      import('./signup/forms/student').then((e) => e.Signupform3),
+    );
+    forms = [
+      <Signup1 key={1} />,
+      <Signup2 key={2} />,
+      <Signup3 key={3} />,
+      <Signup4 key={4} />,
+    ];
+  } else {
+    console.log('else');
+
+    const Signup1 = dynamic(() =>
+      import('./signup/forms/donor').then((e) => e.Signupform),
+    );
+    const Signup2 = dynamic(() =>
+      import('./signup/forms/donor').then((e) => e.Signupform1),
+    );
+    const Signup3 = dynamic(() =>
+      import('./signup/forms/donor').then((e) => e.Signupform2),
+    );
+
+    forms = [<Signup1 key={1} />, <Signup2 key={2} />, <Signup3 key={3} />];
+  }
+
+    return (
+      <DefaultLayout>
+        <Breadcrumb pageName="Sign Up" />
+        <div className="flex card flex-wrap items-stretch justify-center">
           <div
-            className="hidden w-full xl:block xl:w-1/2 bg-no-repeat bg-cover "
-            style={{ backgroundImage: 'url(/singup.jpg)' }}
+            className="hidden w-full xl:block xl:w-1/2 bg-no-repeat bg-cover"
+            style={{
+              backgroundImage: `url(/${IStudent ? 'donor.jpg' : 'signup.jpg'})`,
+            }}
           >
             <div className="px-26 py-17.5 text-center flex items-center">
               <p className="2xl:px-20 text-white font-anton text-2xl">
-                Building a future for children starts with laying a strong
-                foundation of education. Your donation doesn't just construct a
-                building; it constructs opportunities, dreams, and a brighter
-                tomorrow for those who need it most
+                {IStudent
+                  ? `Know you're not alone. Your registration is more than a step; it's joining a community building dreams and opportunities. Together, we pave the path to a brighter future, where every student thrives.`
+                  : `Building a future for children starts with laying a strong foundation of education. Your donation doesn't just construct a building; it constructs opportunities, dreams, and a brighter tomorrow for those who need it most`}
               </p>
             </div>
           </div>
-
-          <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
-            <Stepper />
+          <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2 h-[800px]">
+            <Stepper forms={forms} />
           </div>
         </div>
-      </div>
-    </DefaultLayout>
-  );
+      </DefaultLayout>
+    );
 };
 
 export default SignUp;
