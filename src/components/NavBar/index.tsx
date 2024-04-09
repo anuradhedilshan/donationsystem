@@ -11,11 +11,17 @@ type Props = {
 
 export default function NavBar({ links }: Props) {
   return (
-    <nav className={` ${Styles.nav } font-anton w-full  text-right`}>
+    <nav className={` ${Styles.nav} font-anton w-full  text-right`}>
       <Link href="#">Donarss</Link>
       <Link href="#">Stories</Link>
       <Link href="#">News & Event</Link>
       <Link href="#">About Us</Link>
+      <Link
+        href="/auth?type=student"
+        className="px-3  rounded-lg bg-primary-light"
+      >
+        Resgiter As Student
+      </Link>
     </nav>
   );
 }

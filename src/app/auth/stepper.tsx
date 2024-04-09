@@ -1,48 +1,95 @@
-/* eslint-disable react/jsx-no-duplicate-props */
-'use client';
-
 import { motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useState } from 'react';
-import Signupform from './signup/forms/singup';
-import Signupform1 from './signup/forms/signup1';
+import { useRouter } from 'next/navigation';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
+import {
+  PlanStudentSchemaType,
+  StudentFieldName,
+  Student_schema,
+} from './signup/forms/student/schema';
+import { form_names as student_names } from './signup/forms/student/data';
 
-export default function Stepper() {
+import {
+  DonorFieldName,
+  PlanDonorSchemaType,
+} from './signup/forms/donor/schema';
+import { form_names as donor_names } from './signup/forms/donor/data';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+type Props = {
+  forms: React.ReactElement[];
+  isStudent: boolean;
+  // handleSubmit: SubmitHandler<PlanStudentSchemaType>;
+};
+
+export default function Stepper({ isStudent, forms }: Props) {
+  console.log('render stepper');
+
+  const methods = useForm<PlanStudentSchemaType>({
+    resolver: zodResolver(Student_schema),
+  });
+
+  const processForm: SubmitHandler<
+    PlanStudentSchemaType | PlanDonorSchemaType
+  > = () => {
+    methods.reset();
+  };
+
   const [step, setStep] = useState(1);
+  const router = useRouter();
+  const steps = [];
+  for (let i = 0; i < forms.length; i++) {
+    steps.push(
+      <Step key={i} step={step} stepOrder={i + 1} setStep={setStep} />,
+    );
+  }
+  async function nextStep() {
+    if (step < forms.length) {
+      const fields = isStudent
+        ? student_names[step - 1]
+        : donor_names[step - 1];
 
-  function nextStep() {
-    if (step < 5) setStep((lastStep) => lastStep + 1);
+      const output = await methods.trigger(
+        fields as StudentFieldName[] | DonorFieldName[],
+        {
+          shouldFocus: true,
+        },
+      );
+      console.log(output);
+
+      if (!output) return;
+
+      setStep((lastStep) => lastStep + 1);
+    }
   }
 
   function back() {
     if (step > 1) setStep((lastStep) => lastStep - 1);
   }
 
+  const onSubmit: SubmitHandler<any> = (data) => console.log(data);
+
   return (
     <div className="bg-white p-6 rounded-2xl w-full">
-      <div className="flex gap-8 w-full justify-center">
-        <Step step={step} stepOrder={1} setStep={setStep} />
-        <Step step={step} stepOrder={2} setStep={setStep} />
-      </div>
+      <div className="flex gap-8 w-full justify-center ">{steps}</div>
+      <FormProvider {...methods}>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          {step >= 1 && step <= forms.length ? forms[step - 1] : null}
 
-      {step == 1 ? (
-        <Signupform />
-      ) : step == 2 ? (
-        <Signupform1 />
-      ) : (
-        <Signupform />
-      )}
-
-      <div className="flex justify-between mt-8">
-        <button className="text-gray-700" onClick={back}>
-          Back
-        </button>
-        <button
-          onClick={nextStep}
-          className="bg-primary-light text-white py-2 px-8 rounded-full"
-        >
-          {step === 5 ? 'Complete' : 'Next'}
-        </button>
-      </div>
+          <div className="flex justify-between mt-8">
+            <button className="text-gray-700" onClick={back}>
+              Back
+            </button>
+            <button
+              type={`${step === forms.length ? 'submit' : 'button'}`}
+              onClick={nextStep}
+              className="bg-primary-light text-white py-2 px-8 rounded-full"
+            >
+              {step === forms.length ? 'Complete' : 'Next'}
+            </button>
+          </div>
+        </form>
+      </FormProvider>
     </div>
   );
 }
@@ -61,7 +108,6 @@ function Step({
 
   return (
     <motion.button
-      onClick={() => setStep(stepOrder)}
       initial={false}
       animate={status}
       variants={{

@@ -39,7 +39,7 @@ export default function DonateSlider() {
         onMouseUp={handleChange}
       />
       <button className="bg-secondary mt-7 block w-fit px-24 py-1 rounded-xl font-anton text-4xl">
-        <Link href={'/auth'}>Donate</Link>
+        <Link href={`/auth?type=donor&amount:${amount}`}>Donate</Link>
       </button>
     </div>
   );
