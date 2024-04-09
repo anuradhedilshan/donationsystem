@@ -1,10 +1,5 @@
 import { z } from 'zod';
 
-
-interface FileList {
-  [Symbol.iterator](): IterableIterator<File>;
-}
-
 const MAX_UPLOAD_SIZE = 1024 * 1024 * 3; // 3MB
 const ACCEPTED_FILE_TYPES = [
   'image/jpeg',
@@ -13,6 +8,12 @@ const ACCEPTED_FILE_TYPES = [
   'image/webp',
 ];
 
+type FileLists = {
+  [Symbol.iterator](): IterableIterator<File>;
+};
+interface H {
+  [Symbol.iterator](): IterableIterator<File>;
+}
 export const Student_schema = z
   .object({
     fname: z.string().min(3, 'First name is required'),
@@ -34,24 +35,24 @@ export const Student_schema = z
     scl: z.string().min(2, '(School / University) is required'),
     grade: z.number(),
     birthcer: z
-      .instanceof(FileList)
+      .any()
+      .refine((files) => files?.lengh !== 0, 'Document is required.')
+      .refine((files) => {
+        return files?.[0]?.size <= MAX_UPLOAD_SIZE;
+      }, `Max document size is 10MB.`)
       .refine(
-        (file) => file[0]?.size <= MAX_UPLOAD_SIZE,
-        `Max image size is 5MB.`,
-      )
-      .refine(
-        (file) => ACCEPTED_FILE_TYPES.includes(file[0]?.type),
-        'Only .jpg, .jpeg, .png and .webp formats are supported.',
+        (files) => !ACCEPTED_FILE_TYPES.includes(files?.[0]?.type),
+        'Only .pdf format is supported.',
       ),
     reclett: z
-      .instanceof(FileList)
+      .any()
+      .refine((files) => files?.lengh !== 0, 'Document is required.')
+      .refine((files) => {
+        return files?.[0]?.size <= MAX_UPLOAD_SIZE;
+      }, `Max document size is 10MB.`)
       .refine(
-        (file) => file[0]?.size <= MAX_UPLOAD_SIZE,
-        `Max image size is 5MB.`,
-      )
-      .refine(
-        (file) => ACCEPTED_FILE_TYPES.includes(file[0]?.type),
-        'Only .jpg, .jpeg, .png and .webp formats are supported.',
+        (files) => !ACCEPTED_FILE_TYPES.includes(files?.[0]?.type),
+        'Only .pdf format is supported.',
       ),
     salary: z.number(),
     password: z.string().min(8).max(12),

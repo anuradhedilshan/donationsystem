@@ -1,32 +1,37 @@
 import { motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import {
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from 'react-hook-form';
+import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import {
   PlanStudentSchemaType,
   StudentFieldName,
   Student_schema,
 } from './signup/forms/student/schema';
-import { form_names } from './signup/forms/student/data';
+import { form_names as student_names } from './signup/forms/student/data';
+
+import {
+  DonorFieldName,
+  PlanDonorSchemaType,
+} from './signup/forms/donor/schema';
+import { form_names as donor_names } from './signup/forms/donor/data';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 type Props = {
   forms: React.ReactElement[];
+  isStudent: boolean;
   // handleSubmit: SubmitHandler<PlanStudentSchemaType>;
 };
 
-export default function Stepper({ forms }: Props) {
+export default function Stepper({ isStudent, forms }: Props) {
   console.log('render stepper');
 
   const methods = useForm<PlanStudentSchemaType>({
     resolver: zodResolver(Student_schema),
   });
 
-  const processForm: SubmitHandler<PlanStudentSchemaType> = () => {
+  const processForm: SubmitHandler<
+    PlanStudentSchemaType | PlanDonorSchemaType
+  > = () => {
     methods.reset();
   };
 
@@ -40,11 +45,16 @@ export default function Stepper({ forms }: Props) {
   }
   async function nextStep() {
     if (step < forms.length) {
-      const fields = form_names[step - 1];
+      const fields = isStudent
+        ? student_names[step - 1]
+        : donor_names[step - 1];
 
-      const output = await methods.trigger(fields as StudentFieldName[], {
-        shouldFocus: true,
-      });
+      const output = await methods.trigger(
+        fields as StudentFieldName[] | DonorFieldName[],
+        {
+          shouldFocus: true,
+        },
+      );
       console.log(output);
 
       if (!output) return;

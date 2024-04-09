@@ -5,3 +5,6 @@ interface InputField {
   placeholder?: string;
   type?: string;
 }
+interface H {
+  [Symbol.iterator](): IterableIterator<File>;
+}
