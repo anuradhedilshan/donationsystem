@@ -10,16 +10,16 @@ export default function Template({ children }: { children: React.ReactNode }) {
           <NavBar />
         </div>
         <div>
-          <Avatar
-            alt="dilshan"
-            imgSrc="https://randomuser.me/api/portraits/women/81.jpg"
-          />
+          <div className='md:block hidden'>
+            <Avatar
+              alt="dilshan"
+              imgSrc="https://randomuser.me/api/portraits/women/81.jpg"
+            />
+          </div>
         </div>
       </header>
 
-      <main>
-      {children}
-      </main>
+      <main>{children}</main>
     </div>
   );
 }
