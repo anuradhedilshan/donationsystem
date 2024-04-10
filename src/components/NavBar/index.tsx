@@ -11,15 +11,9 @@ type Props = {
 
 export default function NavBar({ links }: Props) {
   return (
-<<<<<<< HEAD
-    <nav className={` ${Styles.nav} font-anton w-full  text-right`}>
-=======
-<<<<<<< Updated upstream
-    <nav className={` ${Styles.nav } font-anton w-full  text-right`}>
-=======
-    <nav className={` ${Styles.nav} md:block flex flex-wrap fix md:text-2xl text-lg md:h-[40px] font-anton w-full  md:text-right`}>
->>>>>>> Stashed changes
->>>>>>> cb1f6d5 (Details Box)
+    <nav
+      className={` ${Styles.nav} md:block flex flex-wrap fix md:text-2xl text-lg md:h-[40px] font-anton w-full  md:text-right`}
+    >
       <Link href="#">Donarss</Link>
       <Link href="#">Stories</Link>
       <Link href="#">News</Link>

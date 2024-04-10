@@ -1,4 +1,4 @@
-import DetailsBox from '@/components/DetailsBox';
+import DetailsBox, { Carousel } from '@/components/DetailsBox';
 import DonateSlider from '@/components/DonateSlider';
 import StatusBox from '@/components/StatusBox/StatusBox';
 
@@ -29,7 +29,7 @@ export default function home() {
             value={'3892$+'}
             // varient={{ mode: 'light' }}
           />
-          <DetailsBox title='News'/>
+          <Carousel />
         </div>
       </section>
     </div>

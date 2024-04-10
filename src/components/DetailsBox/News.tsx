@@ -9,7 +9,7 @@ type Props = {
 
 export default function News({ title, img, link }: Props) {
   return (
-    <div className=" max-w-[550px] flex flex-col p-5 m-4 rounded-2xl text-primary-dark border-dotted border-gray border">
+    <div className=" max-w-[550px] flex flex-col p-5 m-4 rounded-2xl text-primary-dark border-dotted border-gray border border-6">
       <span className="text-xl md:text-4xl font-bold mb-3 text-white"> {title} </span>
       <Image src={img} alt={title} width="600" height="900" />
       <button className="bg-primary-light mt-7 block w-fit px-10 py-1 rounded-xl font-anton text-xl">

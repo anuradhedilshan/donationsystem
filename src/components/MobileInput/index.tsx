@@ -92,9 +92,9 @@ export default function MobileInput() {
         >
           <path
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
             d="m1 1 4 4 4-4"
           />
         </svg>
@@ -222,8 +222,8 @@ export default function MobileInput() {
                     />
                     <path
                       stroke="#DB1F35"
-                      stroke-linecap="round"
-                      stroke-width=".667"
+                      strokeLinecap="round"
+                      strokeWidth=".667"
                       d="M13.067 4.933L21.933-.9M14.009 10.088l7.947 5.357M5.604 4.917L-2.686-.67M6.503 10.024l-9.189 6.093"
                     />
                     <path
@@ -267,7 +267,7 @@ export default function MobileInput() {
                     <path
                       fill="#fff"
                       stroke="#fff"
-                      stroke-width=".667"
+                      strokeWidth=".667"
                       d="M0 .167h-.901l.684.586 3.15 2.7v.609L-.194 6.295l-.14.1v1.24l.51-.319L3.83 5.033h.73L7.7 7.276a.488.488 0 00.601-.767L5.467 4.08v-.608l2.987-2.134a.667.667 0 00.28-.543V-.1l-.51.318L4.57 2.5h-.73L.66.229.572.167H0z"
                     />
                     <path
@@ -437,7 +437,7 @@ export default function MobileInput() {
                     y=".75"
                     fill="#fff"
                     stroke="#F5F5F5"
-                    stroke-width=".5"
+                    strokeWidth=".5"
                     rx="1.75"
                   />
                   <mask
@@ -455,7 +455,7 @@ export default function MobileInput() {
                       y=".75"
                       fill="#fff"
                       stroke="#fff"
-                      stroke-width=".5"
+                      strokeWidth=".5"
                       rx="1.75"
                     />
                   </mask>
