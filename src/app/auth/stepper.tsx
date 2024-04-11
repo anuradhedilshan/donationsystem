@@ -132,9 +132,6 @@ function Step({
           backgroundColor: '#FDD160',
         },
       }}
-      onClick={() => {
-        setStep(stepOrder);
-      }}
       transition={{ duration: 0.5 }}
       className="w-12 h-12 rounded-full border fill-white text-gray-500 grid place-items-center "
     >
