@@ -46,11 +46,11 @@ export default function Signupform4() {
           <li>The Principal of the Sunday School</li>
         </ul>
         <p className="mb-4">
-          Ensure at least two signatures have the school's rubber stamp.
+          Ensure at least two signatures have the schools rubber stamp.
         </p>
         <p className="mb-4">
-          The "<em>Grama Niladhari</em>" should provide their endorsement near
-          the text box before account creation.
+          The <em>Grama Niladhari</em> should provide their endorsement near the
+          text box before account creation.
         </p>
         <p className="font-semibold">Thank you for your cooperation.</p>
       </div>

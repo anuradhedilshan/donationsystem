@@ -1,5 +1,5 @@
 import {
-  PlanStudentSchemaType,
+  studentSchemaType,
   StudentFieldName,
 } from '@/app/auth/signup/forms/student/schema';
 import { FieldError, useFormContext } from 'react-hook-form';
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default function CustomRadio({ error, name, options }: Props) {
-  const { register } = useFormContext<PlanStudentSchemaType>();
+  const { register } = useFormContext<studentSchemaType>();
   return (
     <ul
       className={`items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white  ${error ? 'border-red' : 'border-stroke '}`}
