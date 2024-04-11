@@ -1,51 +1,60 @@
-import Link from 'next/link';
-import { FaLock } from 'react-icons/fa6';
-import CheckboxTwo from '@/components/Checkboxes/CheckboxTwo';
-import CustomRadio from '@/components/Radio';
 import Input from '@/components/Input';
 import { useFormContext } from 'react-hook-form';
-import { PlanStudentSchemaType } from './schema';
+import { studentSchemaType } from './schema';
+import SelectGroupOne from '@/components/SelectGroup/SelectGroupOne';
+import { BankList } from '../formValues';
 
-export default function Signupform3() {
+export default function BankDetailsForm() {
   const {
     register,
     formState: { errors },
-  } = useFormContext<PlanStudentSchemaType>();
+  } = useFormContext<studentSchemaType>();
 
   return (
-    <div className="w-full p-4 sm:p-12.5 xl:p-10.5 min-h-[600px]">
-      <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-        Your Password
+    <div>
+      <h2 className="mb-5 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+        Bank Account Details
       </h2>
-      {/* <DonateSlider /> */}
 
       <Input
-        {...register('password')}
-        error={errors['password']}
-        type="password"
-        placeholder="Retype Your Password"
-        Icon={FaLock}
+        label="Account Number"
+        {...register('bankDetails.accountNumber')}
+        type="text"
+        placeholder="Enter your bank account number"
+        error={errors.bankDetails?.accountNumber}
       />
+
       <Input
-        {...register('confirm')}
-        error={errors['confirm']}
-        type="password"
-        placeholder="Retype Your Password"
-        Icon={FaLock}
+        label="Account Holder Name"
+        {...register('bankDetails.accountHolderName')}
+        type="text"
+        placeholder="Enter account holder name"
+        error={errors.bankDetails?.accountHolderName}
       />
 
-      {/* <div className="mb-6">
-        <CheckboxTwo />
-      </div> */}
+      <SelectGroupOne
+        values={BankList}
+        label="Bank Name"
+        {...register('bankDetails.bankName')}
+        placeholder="Enter your bank name"
+        error={errors.bankDetails?.bankName}
+      />
 
-      <div className="mt-6 text-center">
-        <p>
-          Already have an account?{' '}
-          <Link href="/auth/signin" className="text-primary">
-            Sign in
-          </Link>
-        </p>
-      </div>
+      <Input
+        label="Branch"
+        {...register('bankDetails.branch')}
+        type="text"
+        placeholder="Enter your bank branch"
+        error={errors.bankDetails?.branch}
+      />
+
+      <Input
+        label="Relationship"
+        {...register('bankDetails.relationship')}
+        type="text"
+        placeholder="Enter your relationship to the account holder"
+        error={errors.bankDetails?.relationship}
+      />
     </div>
   );
 }

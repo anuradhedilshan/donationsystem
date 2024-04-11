@@ -54,7 +54,7 @@ const SignUp: React.FC = () => {
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Sign Up" />
-      <div className="flex card flex-wrap items-stretch justify-center">
+      <div className="flex card flex-wrap items-stretch justify-center shadow-1 rounded-xl">
         <div
           className="hidden w-full xl:block xl:w-1/2 bg-no-repeat bg-cover"
           style={{
@@ -69,7 +69,7 @@ const SignUp: React.FC = () => {
             </p>
           </div>
         </div>
-        <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2 h-[800px]">
+        <div className="w-full border-stroke border dark:border-strokedark xl:w-1/2 xl:border-l-2 h-[800px]">
           <Suspense fallback={<Loader />}>
             <Stepper isStudent={IStudent} forms={forms} />
           </Suspense>

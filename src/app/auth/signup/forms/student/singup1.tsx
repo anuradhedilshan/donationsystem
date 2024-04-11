@@ -1,71 +1,80 @@
 import SelectGroupOne from '@/components/SelectGroup/SelectGroupOne';
 import Link from 'next/link';
-import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
+import {
+  FaCalendar,
+  FaEnvelope,
+  FaGlobe,
+  FaGraduationCap,
+  FaLocationDot,
+  FaSchool,
+  FaSchoolFlag,
+} from 'react-icons/fa6';
 import { SL_State } from '../formValues';
 import { useFormContext } from 'react-hook-form';
-import { PlanStudentSchemaType } from './schema';
+import { PlanStudentSchemaType, studentSchemaType } from './schema';
 import Input from '@/components/Input';
+import { watch } from 'fs';
 
 export default function Signupform1() {
   const {
     register,
     formState: { errors },
-    watch,
-  } = useFormContext<PlanStudentSchemaType>();
+  } = useFormContext<studentSchemaType>();
 
-  console.log(watch('bd'));
   return (
-    <div className="w-full p-4 sm:p-12.5 xl:p-10.5">
-      <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+    <div className="w-full pt-1">
+      <h2 className="mb-5 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
         Enter Your Personal Details
       </h2>
       {/* <DonateSlider /> */}
 
-      <div className="mb-4">
-        <SelectGroupOne
-          error={errors['country']}
-          name="country"
-          values={[{ name: 'Srilanka', value: 'sl' }]}
-          label="Country"
-        />
-      </div>
-
-      <div className="mb-4">
-        <SelectGroupOne
-          error={errors['state']}
-          name="state"
-          values={SL_State}
-          label="State"
-        />
-      </div>
+      <Input
+        label="Email"
+        {...register('student.email')}
+        type='email'
+        placeholder="Enter your email address"
+        Icon={FaEnvelope}
+        error={errors['student']?.email}
+      />
 
       <Input
-        {...register('fulladd')}
-        error={errors['fulladd']}
-        label="Full Address"
-        name="fulladd"
+        label="School Name"
+        {...register('student.schoolName')}
         type="text"
-        placeholder="Enter your Full Address "
-        Icon={FaLocationDot}
+        placeholder="Enter your school name"
+        Icon={FaSchool}
+        error={errors['student']?.schoolName}
       />
 
       <Input
-        {...register('bd')}
-        error={errors['bd']}
-        label="Birth Day"
-        name="bd"
-        type="date"
-        placeholder="enter your BirthDay"
+        label="School Address"
+        {...register('student.schoolAddress')}
+        type="text"
+        placeholder=" Enter your school address"
+        Icon={FaSchoolFlag}
+        error={errors['student']?.schoolAddress}
       />
 
-      <div className="mt-6 text-center">
-        <p>
-          Already have an account?{' '}
-          <Link href="/auth/signin" className="text-primary">
-            Sign in
-          </Link>
-        </p>
-      </div>
+      <Input
+        label="Grade"
+        min={1}
+        max={13}
+        {...register('student.grade')}
+        type="number"
+        placeholder="Enter your current grade"
+        Icon={FaGraduationCap}
+        error={errors['student']?.grade}
+      />
+
+      <Input
+        label="Future Aspiration"
+        {...register('student.futureAspiration')}
+        type="text"
+        placeholder=" Enter your future aspiration"
+        Icon={FaGlobe}
+        error={errors['student']?.futureAspiration}
+      />
+
     </div>
   );
 }

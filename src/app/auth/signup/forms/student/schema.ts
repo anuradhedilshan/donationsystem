@@ -1,67 +1,76 @@
-import { z } from 'zod';
+import * as z from 'zod';
 
-const MAX_UPLOAD_SIZE = 1024 * 1024 * 3; // 3MB
-const ACCEPTED_FILE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-];
+const studentSchema = z.object({
+  fullName: z.string().min(3, 'Full name must be at least 3 characters'),
+  dateOfBirth: z
+    .date()
+    .min(
+      new Date('1900-01-01'),
+      'Date of birth must be on or after January 1, 1900',
+    )
+    .max(
+      new Date(Date.now() - 5 * 365.25 * 24 * 60 * 60 * 1000),
+      'Date of birth must be within the last 5 years',
+    ),
+  gender: z.string(),
+  currentAddress: z.string().min(1, 'Current address is required'),
+  permanentAddress: z.string().min(1, 'Permanent address is required'),
+  email: z.string().email('Invalid email address'),
+  schoolName: z.string().min(1, 'School name is required'),
+  schoolAddress: z.string().min(1, 'School address is required'),
+  grade: z.string().min(1, 'Grade is required'),
+  futureAspiration: z.string().min(1, 'Future aspiration is required'),
+});
 
-type FileLists = {
-  [Symbol.iterator](): IterableIterator<File>;
-};
-interface H {
-  [Symbol.iterator](): IterableIterator<File>;
-}
-export const Student_schema = z
-  .object({
-    fname: z.string().min(3, 'First name is required'),
-    lname: z.string().min(2, 'Last name is required'),
-    email: z
-      .string()
-      .email('Invalid email format')
-      .min(10, 'Email is required'),
-    gender: z
-      .string()
-      .min(1)
-      .refine((value) => value !== '', { message: 'Gender is required' }),
-    tel: z.string().min(10, 'Mobile number is required'),
-    country: z.string().min(1, 'contry is required'),
-    state: z.string().min(1, 'State is required'),
-    fulladd: z.string().min(1, 'Full Address is  required'),
-    bd: z.string().min(10, 'Birthday not Valid'),
-    education: z.string().min(3, 'education  is required'),
-    scl: z.string().min(2, '(School / University) is required'),
-    grade: z.number(),
-    birthcer: z
-      .any()
-      .refine((files) => files?.lengh !== 0, 'Document is required.')
-      .refine((files) => {
-        return files?.[0]?.size <= MAX_UPLOAD_SIZE;
-      }, `Max document size is 10MB.`)
-      .refine(
-        (files) => !ACCEPTED_FILE_TYPES.includes(files?.[0]?.type),
-        'Only .pdf format is supported.',
-      ),
-    reclett: z
-      .any()
-      .refine((files) => files?.lengh !== 0, 'Document is required.')
-      .refine((files) => {
-        return files?.[0]?.size <= MAX_UPLOAD_SIZE;
-      }, `Max document size is 10MB.`)
-      .refine(
-        (files) => !ACCEPTED_FILE_TYPES.includes(files?.[0]?.type),
-        'Only .pdf format is supported.',
-      ),
-    salary: z.number(),
-    password: z.string().min(8).max(12),
-    confirm: z.string().min(8).max(12),
-  })
-  .refine((data) => data.password === data.confirm, {
-    message: "Passwords don't match",
-    path: ['confirm'],
-  });
+const parentSchema = z.object({
+  fullName: z.string().min(3, 'Full name must be at least 3 characters'),
+  occupation: z.string().min(1, 'Occupation is required'),
+  nicNo: z.string().min(9, 'NIC number is required'),
+  age: z.number().positive('Age must be a positive number'),
+  address: z.string().min(1, 'Address is required'),
+  phoneNo: z.string().min(10, 'Phone number is required'),
+  email: z.string().email('Invalid email address'),
+  monthlyIncome: z
+    .number()
+    .positive('Monthly income must be a positive number'),
+  otherIncome: z.number().positive('Other income must be a positive number'),
+});
 
-export type PlanStudentSchemaType = z.infer<typeof Student_schema>;
-export type StudentFieldName = keyof PlanStudentSchemaType;
+const bankDetailsSchema = z.object({
+  accountHolderName: z.string().min(1, 'Account holder name is required'),
+  relationship: z.string().min(1, 'Relationship is required'),
+  bankName: z.string().min(1, 'Bank name is required'),
+  accountNumber: z.string().min(1, 'Account number is required'),
+  branch: z.string().min(1, 'Branch is required'),
+});
+
+const recommendationSchema = z.object({
+  principalOfSchoolFile: z
+    .any()
+    .refine(
+      (file) => file instanceof File,
+      'Principal of school recommendation must be a file',
+    ),
+  principalOfSundaySchoolFile: z
+    .any()
+    .refine(
+      (file) => file instanceof File,
+      'Principal of Sunday school recommendation must be a file',
+    ),
+  gramaNiladhariFile: z
+    .any()
+    .refine(
+      (file) => file instanceof File,
+      'Grama Niladhari recommendation must be a file',
+    ),
+});
+
+export const studentRegistrationSchema = z.object({
+  student: studentSchema,
+  parent: parentSchema,
+  bankDetails: bankDetailsSchema,
+  recommendation: recommendationSchema,
+});
+
+export type studentSchemaType = z.infer<typeof studentRegistrationSchema>;
+export type StudentFieldName = keyof studentSchemaType;

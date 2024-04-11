@@ -2,19 +2,21 @@ import { motion } from 'framer-motion';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
-import {
-  PlanStudentSchemaType,
-  StudentFieldName,
-  Student_schema,
-} from './signup/forms/student/schema';
+
 import { form_names as student_names } from './signup/forms/student/data';
 
 import {
   DonorFieldName,
+  Donor_schema,
   PlanDonorSchemaType,
 } from './signup/forms/donor/schema';
 import { form_names as donor_names } from './signup/forms/donor/data';
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  StudentFieldName,
+  studentRegistrationSchema,
+  studentSchemaType,
+} from './signup/forms/student/schema';
 
 type Props = {
   forms: React.ReactElement[];
@@ -25,13 +27,11 @@ type Props = {
 export default function Stepper({ isStudent, forms }: Props) {
   console.log('render stepper');
 
-  const methods = useForm<PlanStudentSchemaType>({
-    resolver: zodResolver(Student_schema),
+  const methods = useForm<studentSchemaType | PlanDonorSchemaType>({
+    resolver: zodResolver(isStudent ? studentRegistrationSchema : Donor_schema),
   });
 
-  const processForm: SubmitHandler<
-    PlanStudentSchemaType | PlanDonorSchemaType
-  > = () => {
+  const processForm: SubmitHandler<studentSchemaType> = () => {
     methods.reset();
   };
 
@@ -57,7 +57,7 @@ export default function Stepper({ isStudent, forms }: Props) {
       );
       console.log(output);
 
-      if (!output) return;
+      // if (!output) return;
 
       setStep((lastStep) => lastStep + 1);
     }
@@ -73,7 +73,7 @@ export default function Stepper({ isStudent, forms }: Props) {
     <div className="bg-white p-6 rounded-2xl w-full">
       <div className="flex gap-8 w-full justify-center ">{steps}</div>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={methods.handleSubmit(onSubmit)} className="p-3 max-h-[700px] overflow-y-auto">
           {step >= 1 && step <= forms.length ? forms[step - 1] : null}
 
           <div className="flex justify-between mt-8">

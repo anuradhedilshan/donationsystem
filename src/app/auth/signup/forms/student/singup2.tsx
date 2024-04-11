@@ -1,80 +1,87 @@
-import { FaGraduationCap, FaSchool } from 'react-icons/fa6';
-import SalaryRangeSelector from '@/components/Range/SalaryRangeSelector';
-import CustomRadio from '@/components/Radio';
-import { EductionFilter } from '../formValues';
 import Input from '@/components/Input';
 import { useFormContext } from 'react-hook-form';
-import { PlanStudentSchemaType } from './schema';
-import { ChangeEvent, ChangeEventHandler, memo, useState } from 'react';
+import { studentSchemaType } from './schema';
 
-function Signupform2() {
-  const {
-    register,
-    getValues,
-    formState: { errors },
-  } = useFormContext<PlanStudentSchemaType>();
-
-  const [birthcer, setbirthcer] = useState<string>();
-  const [reclett, setreccert] = useState<string>();
+export default function ParentForm() {
+  const { register, formState: { errors } } = useFormContext<studentSchemaType>();
 
   return (
-    <div className="w-full p-4 sm:p-12.5 xl:p-10.5 min-h-[600px]">
-      {/* <DonateSlider /> */}
-      <div className="mb-2">
-        <CustomRadio
-          error={errors['education']}
-          name="education"
-          options={EductionFilter}
-        />
-      </div>
+    <div>
+      <h2 className="mb-5 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
+        Parent/Guardian Details
+      </h2>
 
       <Input
-        {...register('scl')}
-        error={errors['scl']}
-        Icon={FaSchool}
-        label="School / University"
-        name="scl"
+        label="Full Name"
+        {...register('parent.fullName')}
         type="text"
-        placeholder="Enter your School"
+        placeholder="Enter parent/guardian full name"
+        error={errors.parent?.fullName}
       />
 
       <Input
-        label=" Grade / Level"
-        {...register('grade', {
-          setValueAs: (v) => Number(v),
-        })}
-        error={errors['grade']}
-        name="grade"
+        label="Occupation"
+        {...register('parent.occupation')}
+        type="text"
+        placeholder="Enter parent/guardian occupation"
+        error={errors.parent?.occupation}
+      />
+
+      <Input
+        label="NIC No"
+        {...register('parent.nicNo')}
+        type="text"
+        placeholder="Enter parent/guardian NIC number"
+        error={errors.parent?.nicNo}
+      />
+
+      <Input
+        label="Age"
+        {...register('parent.age', { setValueAs: (value) => Number(value) })}
         type="number"
-        min={1}
-        max={12}
-        placeholder="Enter your Grade / Level"
-        Icon={FaGraduationCap}
-      />
-      <Input
-        {...register('birthcer', {
-          required: 'Recipe picture is required',
-        })}
-        // value={getValues('birthcer')[0]?.name || ''}
-        error={errors['birthcer']}
-        label="Upload Your Birth Certificate / ID / Postal ID"
-        type="file"
+        placeholder="Enter parent/guardian age"
+        error={errors.parent?.age}
       />
 
       <Input
-        {...register('reclett', {
-          required: 'Recipe picture is required',
-        })}
-        label="Upload recommendation letter from Grama Niladhari or Justice of Peace."
-        error={errors['reclett']}
-        name="reclett"
-        type="file"
+        label="Address"
+        {...register('parent.address')}
+        type="text"
+        placeholder="Enter parent/guardian address"
+        error={errors.parent?.address}
       />
-      <div className="mt-6 ">
-        <SalaryRangeSelector />
-      </div>
+
+      <Input
+        label="Phone No"
+        {...register('parent.phoneNo')}
+        type="tel"
+        placeholder="Enter parent/guardian phone number"
+        error={errors.parent?.phoneNo}
+      />
+
+      <Input
+        label="Email"
+        {...register('parent.email')}
+        type="email"
+        placeholder="Enter parent/guardian email address"
+        error={errors.parent?.email}
+      />
+
+      <Input
+        label="Monthly Income (LKR)"
+        {...register('parent.monthlyIncome', { setValueAs: (value) => Number(value), min: 10000, max: 1000000 })}
+        type="number"
+        placeholder="Enter parent/guardian monthly income"
+        error={errors.parent?.monthlyIncome}
+      />
+
+      <Input
+        label="Other Income"
+        {...register('parent.otherIncome', { setValueAs: (value) => Number(value) })}
+        type="number"
+        placeholder="Enter parent/guardian other income"
+        error={errors.parent?.otherIncome}
+      />
     </div>
   );
 }
-
-export default memo(Signupform2);

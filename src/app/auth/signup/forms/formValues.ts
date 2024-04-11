@@ -1,3 +1,21 @@
+export const BankList = [
+  { name: 'Commercial Bank of Ceylon PLC', value: 'C0xB6F8' },
+  { name: "People's Bank", value: 'P3pL51' },
+  { name: 'Hatton National Bank PLC', value: 'H4ttN84' },
+  { name: 'Bank of Ceylon', value: 'B4nkC31' },
+  { name: 'Sampath Bank PLC', value: 'S4mp4tH' },
+  { name: 'Nations Trust Bank PLC', value: 'N47i0n5' },
+  { name: 'DFCC Bank PLC', value: 'DfCcb4' },
+  { name: 'Pan Asia Banking Corporation PLC', value: 'P4N4s1A' },
+  { name: 'Seylan Bank PLC', value: 'S3yL4n6' },
+  { name: 'Union Bank of Colombo PLC', value: 'Un10nB8' },
+  { name: 'Commercial Credit & Finance PLC', value: 'CcFpLc1' },
+  {
+    name: 'Housing Development Finance Corporation Bank of Sri Lanka',
+    value: 'HdFcb0',
+  },
+];
+
 export const Gender = [
   {
     name: 'Male',
