@@ -44,33 +44,18 @@ const bankDetailsSchema = z.object({
   branch: z.string().min(1, 'Branch is required'),
 });
 
-const recommendationSchema = z.object({
-  principalOfSchoolFile: z
-    .any()
-    .refine(
-      (file) => file instanceof File,
-      'Principal of school recommendation must be a file',
-    ),
-  principalOfSundaySchoolFile: z
-    .any()
-    .refine(
-      (file) => file instanceof File,
-      'Principal of Sunday school recommendation must be a file',
-    ),
-  gramaNiladhariFile: z
-    .any()
-    .refine(
-      (file) => file instanceof File,
-      'Grama Niladhari recommendation must be a file',
-    ),
-});
-
-export const studentRegistrationSchema = z.object({
-  student: studentSchema,
-  parent: parentSchema,
-  bankDetails: bankDetailsSchema,
-  recommendation: recommendationSchema,
-});
+export const studentRegistrationSchema = z
+  .object({
+    student: studentSchema,
+    parent: parentSchema,
+    bankDetails: bankDetailsSchema,
+    password: z.string().min(8).max(12),
+    confirm: z.string().min(8).max(12),
+  })
+  .refine((data) => data.password === data.confirm, {
+    message: "Passwords don't match",
+    path: ['confirm'],
+  });
 
 export type studentSchemaType = z.infer<typeof studentRegistrationSchema>;
 export type StudentFieldName = keyof studentSchemaType;

@@ -29,11 +29,15 @@ const SignUp: React.FC = () => {
     const Signup4 = dynamic(() =>
       import('./signup/forms/student').then((e) => e.Signupform3),
     );
+    const Signup5 = dynamic(() =>
+    import('./signup/forms/student').then((e) => e.Signupform4),
+  );
     forms = [
       <Signup1 key={1} />,
       <Signup2 key={2} />,
       <Signup3 key={3} />,
       <Signup4 key={4} />,
+      <Signup5 key={5} />,
     ];
   } else {
     console.log('else');

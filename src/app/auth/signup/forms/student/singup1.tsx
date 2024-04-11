@@ -1,19 +1,13 @@
-import SelectGroupOne from '@/components/SelectGroup/SelectGroupOne';
-import Link from 'next/link';
 import {
-  FaCalendar,
   FaEnvelope,
   FaGlobe,
   FaGraduationCap,
-  FaLocationDot,
   FaSchool,
   FaSchoolFlag,
 } from 'react-icons/fa6';
-import { SL_State } from '../formValues';
 import { useFormContext } from 'react-hook-form';
-import { PlanStudentSchemaType, studentSchemaType } from './schema';
+import { studentSchemaType } from './schema';
 import Input from '@/components/Input';
-import { watch } from 'fs';
 
 export default function Signupform1() {
   const {

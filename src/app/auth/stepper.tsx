@@ -44,6 +44,7 @@ export default function Stepper({ isStudent, forms }: Props) {
     );
   }
   async function nextStep() {
+    console.log(methods.formState);
     if (step < forms.length) {
       const fields = isStudent
         ? student_names[step - 1]
@@ -55,9 +56,10 @@ export default function Stepper({ isStudent, forms }: Props) {
           shouldFocus: true,
         },
       );
-      console.log(output);
 
-      // if (!output) return;
+      if (!output) return;
+
+      // if(step === forms.length){}
 
       setStep((lastStep) => lastStep + 1);
     }
@@ -67,13 +69,20 @@ export default function Stepper({ isStudent, forms }: Props) {
     if (step > 1) setStep((lastStep) => lastStep - 1);
   }
 
-  const onSubmit: SubmitHandler<any> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<any> = (data) => {
+    console.log('Submit');
+
+    console.log(data);
+  };
 
   return (
     <div className="bg-white p-6 rounded-2xl w-full">
       <div className="flex gap-8 w-full justify-center ">{steps}</div>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)} className="p-3 max-h-[700px] overflow-y-auto">
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className="p-3 max-h-[700px] overflow-y-auto"
+        >
           {step >= 1 && step <= forms.length ? forms[step - 1] : null}
 
           <div className="flex justify-between mt-8">
@@ -122,6 +131,9 @@ function Step({
         complete: {
           backgroundColor: '#FDD160',
         },
+      }}
+      onClick={() => {
+        setStep(stepOrder);
       }}
       transition={{ duration: 0.5 }}
       className="w-12 h-12 rounded-full border fill-white text-gray-500 grid place-items-center "
